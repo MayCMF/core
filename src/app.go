@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/MayCMF/core/src/account"
+	"github.com/MayCMF/core/src/filemanager"
 	"github.com/MayCMF/core/src/i18n"
 	"github.com/MayCMF/core/src/primitives"
 
@@ -179,6 +180,9 @@ func BuildContainer() (*dig.Container, func()) {
 	handleError(err)
 
 	err = primitives.InjectControllers(container)
+	handleError(err)
+
+	err = filemanager.InjectControllers(container)
 	handleError(err)
 
 	// ---------------------------------------------------

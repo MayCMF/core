@@ -11,6 +11,8 @@ github.com/LyricTian/captcha v0.0.0-20190614104510-11aff818cbf4 h1:Kz4kBkI5c2TWw
 github.com/LyricTian/captcha v0.0.0-20190614104510-11aff818cbf4/go.mod h1:HhU+9rUrlt4LAbCpHJAyucNbgAPDl7WniYS4yo4KRNM=
 github.com/LyricTian/queue v1.2.0 h1:OaEiS5D5dQOMFyvvrq11o0uJdAMXDf5nRJggVDFEonY=
 github.com/LyricTian/queue v1.2.0/go.mod h1:CMJcrjcVYLOqN2FnVpXqYJzITcDJNdlq7VLkPXyhduw=
+github.com/MayCMF/example v0.0.0-20191203174407-26782db23488 h1:sRDi5ETo0goq+UX9s7F+wCFgLcIBU1S+TATDNgrVun4=
+github.com/MayCMF/example v0.0.0-20191203174407-26782db23488/go.mod h1:3h9LOdb3ZdS1+zreQQU7GD4crRydc+TrgZ0KYTZRCgk=
 github.com/PuerkitoBio/purell v1.1.0 h1:rmGxhojJlM0tuKtfdvliR84CFHljx9ag64t2xmVkjK4=
 github.com/PuerkitoBio/purell v1.1.0/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578/go.mod h1:uGdkoq3SwY9Y+13GIhn11/XLaGBb4BfwItxLd5jeuXE=

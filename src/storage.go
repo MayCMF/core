@@ -6,6 +6,7 @@ import (
 	"time"
 
 	accountIject "github.com/MayCMF/core/src/account"
+	filemanagerIject "github.com/MayCMF/core/src/filemanager"
 	i18nIject "github.com/MayCMF/core/src/i18n"
 	primitivesIject "github.com/MayCMF/core/src/primitives"
 	"github.com/MayCMF/core/src/transaction"
@@ -69,6 +70,7 @@ func InitStore(container *dig.Container) (func(), error) {
 		accountIject.InjectStarage(container)
 		i18nIject.InjectStarage(container)
 		primitivesIject.InjectStarage(container)
+		filemanagerIject.InjectStarage(container)
 
 	default:
 		return nil, errors.New("Unknown storage")

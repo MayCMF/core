@@ -6,6 +6,7 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/LyricTian/captcha v0.0.0-20190614104510-11aff818cbf4
 	github.com/LyricTian/queue v1.2.0
+	github.com/MayCMF/example v0.0.0-20191203174407-26782db23488 // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/casbin/casbin/v2 v2.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible

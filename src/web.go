@@ -7,6 +7,7 @@ import (
 	"time"
 
 	accountApi "github.com/MayCMF/core/src/account/routers/api"
+	filemanagerApi "github.com/MayCMF/core/src/filemanager/routers/api"
 	i18nApi "github.com/MayCMF/core/src/i18n/routers/api"
 	primitivesApi "github.com/MayCMF/core/src/primitives/routers/api"
 
@@ -50,6 +51,8 @@ func InitWeb(container *dig.Container) *gin.Engine {
 	i18nApi.RegisterRouter(app, container)
 	// Registration Primitives /api routing
 	primitivesApi.RegisterRouter(app, container)
+	// Registration Files /api routing
+	filemanagerApi.RegisterRouter(app, container)
 
 	// Swagger document
 	if dir := cfg.Swagger; dir != "" {
