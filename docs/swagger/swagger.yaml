@@ -1,0 +1,2243 @@
+basePath: /
+definitions:
+  schema.Country:
+    properties:
+      capital:
+        description: Country's Capital
+        type: string
+      code:
+        description: Country's Code
+        type: string
+      continent:
+        description: Continent where country located
+        type: string
+      currency:
+        description: Country's Currency
+        type: string
+      emoji:
+        description: Emoji flag
+        type: string
+      emojiU:
+        description: Emoji flag
+        type: string
+      languages:
+        description: Used languages
+        type: string
+      latlng:
+        description: Country's geo center
+        type: string
+      name:
+        description: Native
+        type: string
+      native:
+        description: Native language
+        type: string
+      phone:
+        description: Phone number
+        type: string
+      timezones:
+        description: Country's timezones
+        type: string
+    required:
+    - code
+    - name
+    type: object
+  schema.HTTPError:
+    properties:
+      error:
+        $ref: '#/definitions/schema.HTTPErrorItem'
+        description: Error item
+        type: object
+    type: object
+  schema.HTTPErrorItem:
+    properties:
+      code:
+        description: Error code
+        type: integer
+      message:
+        description: Error message
+        type: string
+    type: object
+  schema.HTTPStatus:
+    properties:
+      status:
+        description: status(OK)
+        type: string
+    type: object
+  schema.Language:
+    properties:
+      active:
+        description: Status language can be added as content
+        type: boolean
+      code:
+        description: Code
+        type: string
+      default:
+        description: Default language for project
+        type: boolean
+      name:
+        description: Name
+        type: string
+      native:
+        description: Remarks
+        type: string
+      rtl:
+        description: RTL
+        type: boolean
+    required:
+    - name
+    type: object
+  schema.LoginCaptcha:
+    properties:
+      captcha_id:
+        description: Verification code ID
+        type: string
+    type: object
+  schema.LoginParam:
+    properties:
+      captcha_code:
+        description: Verification code
+        type: string
+      captcha_id:
+        description: Verification code ID
+        type: string
+      password:
+        description: Password (md5 encryption)
+        type: string
+      user_name:
+        description: UserName
+        type: string
+    required:
+    - captcha_code
+    - captcha_id
+    - password
+    - user_name
+    type: object
+  schema.LoginTokenInfo:
+    properties:
+      access_token:
+        description: Access token
+        type: string
+      expires_at:
+        description: Token expiration timestamp
+        type: integer
+      token_type:
+        description: Token type
+        type: string
+    type: object
+  schema.Node:
+    properties:
+      created_at:
+        description: Creation time
+        type: string
+      id:
+        description: Node ID
+        type: integer
+      parent:
+        description: Parent
+        type: string
+      parent_path:
+        description: Parent path
+        type: string
+      primitive:
+        description: Primitive Slug
+        type: string
+      references:
+        description: References in JSON Format with reference fields and Primitives
+        type: string
+      slug:
+        description: Slug short machine name
+        type: string
+      status:
+        description: 'Node status (Published: 1, Draft: 0)'
+        type: integer
+      uid:
+        description: User ID
+        type: integer
+      updated_at:
+        description: Updated time
+        type: string
+      uuid:
+        description: UUID
+        type: string
+      variations:
+        $ref: '#/definitions/schema.NodeBodies'
+        description: Node Body with Languages
+        type: object
+    required:
+    - uid
+    type: object
+  schema.NodeBodies:
+    items:
+      properties:
+        body:
+          description: Node Body
+          type: string
+        created_at:
+          description: Creation time
+          type: string
+        language:
+          description: Language Code Identifier
+          type: string
+        nid:
+          description: Node Slug
+          type: string
+        title:
+          description: Node Title
+          type: string
+        uid:
+          description: User ID
+          type: integer
+        updated_at:
+          description: Updated time
+          type: string
+      required:
+      - language
+      - title
+      type: object
+    type: array
+  schema.NodeBody:
+    properties:
+      body:
+        description: Node Body
+        type: string
+      created_at:
+        description: Creation time
+        type: string
+      language:
+        description: Language Code Identifier
+        type: string
+      nid:
+        description: Node Slug
+        type: string
+      title:
+        description: Node Title
+        type: string
+      uid:
+        description: User ID
+        type: integer
+      updated_at:
+        description: Updated time
+        type: string
+    required:
+    - language
+    - title
+    type: object
+  schema.Permission:
+    properties:
+      actions:
+        $ref: '#/definitions/schema.PermissionActions'
+        description: Action list
+        type: object
+      created_at:
+        description: Creation time
+        type: string
+      creator:
+        description: Creator
+        type: string
+      hidden:
+        description: 'Hide Permission (0: don''t hide 1: hide)'
+        type: integer
+      icon:
+        description: Permission icon
+        type: string
+      name:
+        description: Permission name
+        type: string
+      parent_id:
+        description: Parent ID
+        type: string
+      parent_path:
+        description: Parent path
+        type: string
+      record_id:
+        description: Record ID
+        type: string
+      resources:
+        $ref: '#/definitions/schema.PermissionResources'
+        description: Resource list
+        type: object
+      router:
+        description: Access routing
+        type: string
+      sequence:
+        description: Sort value
+        type: integer
+    required:
+    - name
+    type: object
+  schema.PermissionAction:
+    properties:
+      code:
+        description: Action number
+        type: string
+      name:
+        description: Action name
+        type: string
+    type: object
+  schema.PermissionActions:
+    items:
+      properties:
+        code:
+          description: Action number
+          type: string
+        name:
+          description: Action name
+          type: string
+      type: object
+    type: array
+  schema.PermissionResource:
+    properties:
+      code:
+        description: Resource number
+        type: string
+      method:
+        description: Request method
+        type: string
+      name:
+        description: Resource Name
+        type: string
+      path:
+        description: Request path
+        type: string
+    type: object
+  schema.PermissionResources:
+    items:
+      properties:
+        code:
+          description: Resource number
+          type: string
+        method:
+          description: Request method
+          type: string
+        name:
+          description: Resource Name
+          type: string
+        path:
+          description: Request path
+          type: string
+      type: object
+    type: array
+  schema.PermissionTree:
+    properties:
+      actions:
+        $ref: '#/definitions/schema.PermissionActions'
+        description: Action list
+        type: object
+      children:
+        description: Child tree
+        items:
+          $ref: '#/definitions/schema.PermissionTree'
+        type: array
+      hidden:
+        description: 'Hide Permission (0: don''t hide 1: hide)'
+        type: integer
+      icon:
+        description: Permission icon
+        type: string
+      name:
+        description: Permission name
+        type: string
+      parent_id:
+        description: Parent ID
+        type: string
+      parent_path:
+        description: Parent path
+        type: string
+      record_id:
+        description: Record ID
+        type: string
+      resources:
+        $ref: '#/definitions/schema.PermissionResources'
+        description: Resource list
+        type: object
+      router:
+        description: Access routing
+        type: string
+      sequence:
+        description: Sort value
+        type: integer
+    required:
+    - name
+    type: object
+  schema.Primitive:
+    properties:
+      created_at:
+        description: Creation time
+        type: string
+      id:
+        description: Primitive ID
+        type: integer
+      options:
+        description: Options in Jeson Format
+        type: string
+      parent:
+        description: Parent
+        type: string
+      parent_path:
+        description: Parent path
+        type: string
+      slug:
+        description: Slug short machine name
+        type: string
+      uid:
+        description: User ID
+        type: integer
+      updated_at:
+        description: Updated time
+        type: string
+      uuid:
+        description: UUID
+        type: string
+      variations:
+        $ref: '#/definitions/schema.Variations'
+        description: Primitive Body with Languages
+        type: object
+    required:
+    - parent
+    - slug
+    - uid
+    type: object
+  schema.PrimitiveBody:
+    properties:
+      body:
+        description: Primitive Body
+        type: string
+      created_at:
+        description: Creation time
+        type: string
+      language:
+        description: Language Code Identifier
+        type: string
+      slug:
+        description: Primitive Slug
+        type: string
+      title:
+        description: Primitive Title
+        type: string
+      uid:
+        description: User ID
+        type: integer
+      updated_at:
+        description: Updated time
+        type: string
+    required:
+    - language
+    - title
+    type: object
+  schema.Role:
+    properties:
+      created_at:
+        description: Creation time
+        type: string
+      creator:
+        description: Creator
+        type: string
+      memo:
+        description: Remarks
+        type: string
+      name:
+        description: Role Name
+        type: string
+      permissions:
+        $ref: '#/definitions/schema.RolePermissions'
+        description: Permission permission
+        type: object
+      record_id:
+        description: Record ID
+        type: string
+      sequence:
+        description: Sort value
+        type: integer
+    required:
+    - name
+    type: object
+  schema.RolePermission:
+    properties:
+      actions:
+        description: Action permission list
+        items:
+          type: string
+        type: array
+      permission_id:
+        description: Permission ID
+        type: string
+      resources:
+        description: Resource permission list
+        items:
+          type: string
+        type: array
+    type: object
+  schema.RolePermissions:
+    items:
+      properties:
+        actions:
+          description: Action permission list
+          items:
+            type: string
+          type: array
+        permission_id:
+          description: Permission ID
+          type: string
+        resources:
+          description: Resource permission list
+          items:
+            type: string
+          type: array
+      type: object
+    type: array
+  schema.UpdatePasswordParam:
+    properties:
+      new_password:
+        description: Old password (md5 encryption)
+        type: string
+      old_password:
+        description: Old password (md5 encryption)
+        type: string
+    required:
+    - new_password
+    - old_password
+    type: object
+  schema.User:
+    properties:
+      created_at:
+        description: Creation time
+        type: string
+      creator:
+        description: Creator
+        type: string
+      email:
+        description: Email
+        type: string
+      password:
+        description: Password
+        type: string
+      phone:
+        description: Phone number
+        type: string
+      real_name:
+        description: RealName
+        type: string
+      record_id:
+        description: Record ID
+        type: string
+      roles:
+        $ref: '#/definitions/schema.UserRoles'
+        description: Role authorization
+        type: object
+      status:
+        description: 'User Status (1: Enable 2: Disable)'
+        type: integer
+      user_name:
+        description: UserName
+        type: string
+    required:
+    - real_name
+    - status
+    - user_name
+    type: object
+  schema.UserLoginInfo:
+    properties:
+      real_name:
+        description: RealName
+        type: string
+      role_names:
+        description: List of role names
+        items:
+          type: string
+        type: array
+      user_name:
+        description: UserName
+        type: string
+    type: object
+  schema.UserRole:
+    properties:
+      role_id:
+        type: string
+    type: object
+  schema.UserRoles:
+    items:
+      properties:
+        role_id:
+          type: string
+      type: object
+    type: array
+  schema.UserShow:
+    properties:
+      created_at:
+        description: Creation time
+        type: string
+      email:
+        description: Email
+        type: string
+      phone:
+        description: Phone
+        type: string
+      real_name:
+        description: RealName
+        type: string
+      record_id:
+        description: Record ID
+        type: string
+      roles:
+        description: Roles List
+        items:
+          $ref: '#/definitions/schema.Role'
+        type: array
+      status:
+        description: 'User Status (1: Enable 2: Disable)'
+        type: integer
+      user_name:
+        description: UserName
+        type: string
+    type: object
+  schema.Variations:
+    items:
+      properties:
+        body:
+          description: Primitive Body
+          type: string
+        created_at:
+          description: Creation time
+          type: string
+        language:
+          description: Language Code Identifier
+          type: string
+        slug:
+          description: Primitive Slug
+          type: string
+        title:
+          description: Primitive Title
+          type: string
+        uid:
+          description: User ID
+          type: integer
+        updated_at:
+          description: Updated time
+          type: string
+      required:
+      - language
+      - title
+      type: object
+    type: array
+host: 127.0.0.1:8088
+info:
+  contact:
+    name: eneus
+  description: Serverless CMF with Full Rest API and RBAC(Role Base Control Access)
+    System.
+  license: {}
+  title: MayCMF
+  version: 0.1.0
+paths:
+  /api/v1/countries:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - default: 1
+        description: Page Index
+        in: query
+        name: current
+        required: true
+        type: integer
+      - default: 10
+        description: Paging Size
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - description: Numbering
+        in: query
+        name: code
+        type: string
+      - description: Name
+        in: query
+        name: name
+        type: string
+      - description: 'Status (1: Enable 2: Disable)'
+        in: query
+        name: status
+        type: integer
+      responses:
+        "200":
+          description: 'Search result: {list:List data,pagination:{current:Page index,
+            pageSize: Page size, total: The total number}}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.Country'
+            type: array
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query data
+      tags:
+      - Country
+    post:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Create data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Country'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Country'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Create data
+      tags:
+      - Country
+  /api/v1/countries/{code}:
+    delete:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: code
+        in: path
+        name: code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Delete data
+      tags:
+      - Country
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: code
+        in: path
+        name: code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Country'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "404":
+          description: '{error:{code:0,message: Resource does not exist.}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query specified data
+      tags:
+      - Country
+    put:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Country'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Country'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Update data
+      tags:
+      - Country
+  /api/v1/language:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - default: 1
+        description: Page Index
+        in: query
+        name: current
+        required: true
+        type: integer
+      - default: 10
+        description: Paging Size
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - description: Numbering
+        in: query
+        name: code
+        type: string
+      - description: Name
+        in: query
+        name: name
+        type: string
+      - description: 'Status (1: Enable 2: Disable)'
+        in: query
+        name: status
+        type: integer
+      responses:
+        "200":
+          description: 'Search result: {list:List data,pagination:{current:Page index,
+            pageSize: Page size, total: The total number}}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.Language'
+            type: array
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query data
+      tags:
+      - Language
+    post:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Create data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Language'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Language'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Create data
+      tags:
+      - Language
+  /api/v1/language/{code}:
+    delete:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: code
+        in: path
+        name: code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Delete data
+      tags:
+      - Language
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: code
+        in: path
+        name: code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Language'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "404":
+          description: '{error:{code:0,message: Resource does not exist.}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query specified data
+      tags:
+      - Language
+    put:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: code
+        in: path
+        name: code
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Language'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Language'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Update data
+      tags:
+      - Language
+  /api/v1/language/{code}/disable:
+    patch:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: code
+        in: path
+        name: code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status: OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Disable data
+      tags:
+      - Language
+  /api/v1/language/{code}/enable:
+    patch:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: code
+        in: path
+        name: code
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Enable data
+      tags:
+      - Language
+  /api/v1/node:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - default: 1
+        description: Page Index
+        in: query
+        name: current
+        required: true
+        type: integer
+      - default: 10
+        description: Paging Size
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - description: Numbering
+        in: query
+        name: code
+        type: string
+      - description: Name
+        in: query
+        name: name
+        type: string
+      - description: 'Status (1: Enable 2: Disable)'
+        in: query
+        name: status
+        type: integer
+      responses:
+        "200":
+          description: 'Search result: {list:List data,pagination:{current:Page index,
+            pageSize: Page size, total: The total number}}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.Node'
+            type: array
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query data
+      tags:
+      - Node
+    post:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Create data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Node'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Node'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Create data
+      tags:
+      - Node
+  /api/v1/node/{id}:
+    delete:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Delete data
+      tags:
+      - Node
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Node'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "404":
+          description: '{error:{code:0,message: Resource does not exist.}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query specified data
+      tags:
+      - Node
+    put:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Node'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Node'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Update data
+      tags:
+      - Node
+  /api/v1/permissions:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - default: 1
+        description: Paging index
+        in: query
+        name: current
+        required: true
+        type: integer
+      - default: 10
+        description: Paging Size
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - description: Name
+        in: query
+        name: name
+        type: string
+      - description: 'Hide permission (0: don''t hide 1: hide)'
+        in: query
+        name: hidden
+        type: integer
+      - description: Parent ID
+        in: query
+        name: parentID
+        type: string
+      responses:
+        "200":
+          description: 'Search result: {list:List data,pagination:{current:Page index,pageSize:Page
+            size,total:total number}}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.Permission'
+            type: array
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query data
+      tags:
+      - Manage Permission
+    post:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Create data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Permission'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Permission'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Create data
+      tags:
+      - Manage Permission
+  /api/v1/permissions.tree:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Whether to include action data (1 is)
+        in: query
+        name: includeActions
+        type: integer
+      - description: Whether to include resource data (1 is)
+        in: query
+        name: includeResources
+        type: integer
+      responses:
+        "200":
+          description: 'Search result: {list: List data}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.PermissionTree'
+            type: array
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query permission tree
+      tags:
+      - Manage Permission
+  /api/v1/permissions/{id}:
+    delete:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Delete data
+      tags:
+      - Manage Permission
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Permission'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "404":
+          description: '{error:{code:0,message:Resource does not exist.}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query specified data
+      tags:
+      - Manage Permission
+    put:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Permission'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Permission'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Update data
+      tags:
+      - Manage Permission
+  /api/v1/primitives:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - default: 1
+        description: Page Index
+        in: query
+        name: current
+        required: true
+        type: integer
+      - default: 10
+        description: Paging Size
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - description: Numbering
+        in: query
+        name: code
+        type: string
+      - description: Name
+        in: query
+        name: name
+        type: string
+      - description: 'Status (1: Enable 2: Disable)'
+        in: query
+        name: status
+        type: integer
+      responses:
+        "200":
+          description: 'Search result: {list:List data,pagination:{current:Page index,
+            pageSize: Page size, total: The total number}}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.Primitive'
+            type: array
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query data
+      tags:
+      - Primitive
+    post:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Create data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Primitive'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Primitive'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Create data
+      tags:
+      - Primitive
+  /api/v1/primitives/{id}:
+    delete:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Delete data
+      tags:
+      - Primitive
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Primitive'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "404":
+          description: '{error:{code:0,message: Resource does not exist.}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query specified data
+      tags:
+      - Primitive
+    put:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Primitive'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Primitive'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Update data
+      tags:
+      - Primitive
+  /api/v1/pub/current/password:
+    put:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Request parameter
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.UpdatePasswordParam'
+          type: object
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Update personal password
+      tags:
+      - Manage Login
+  /api/v1/pub/current/permissiontree:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      responses:
+        "200":
+          description: 'Search result: {list:Permission tree}'
+          schema:
+            $ref: '#/definitions/schema.Permission'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query current user permission tree
+      tags:
+      - Manage Login
+  /api/v1/pub/current/user:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.UserLoginInfo'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Get current user information
+      tags:
+      - Manage Login
+  /api/v1/pub/login:
+    post:
+      parameters:
+      - description: Request parameter
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.LoginParam'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.LoginTokenInfo'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: User login
+      tags:
+      - Manage Login
+  /api/v1/pub/login/captcha:
+    get:
+      parameters:
+      - description: Verification code ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Reload
+        in: query
+        name: reload
+        type: string
+      produces:
+      - image/png
+      responses:
+        "200":
+          description: Captcha
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Response graphic verification code
+      tags:
+      - Manage Login
+  /api/v1/pub/login/captchaid:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.LoginCaptcha'
+      summary: Get verification code information
+      tags:
+      - Manage Login
+  /api/v1/pub/login/exit:
+    post:
+      responses:
+        "200":
+          description: '{status: OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+      summary: User logout
+      tags:
+      - Manage Login
+  /api/v1/pub/refresh-token:
+    post:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.LoginTokenInfo'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Refresh token
+      tags:
+      - Manage Login
+  /api/v1/roles:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - default: 1
+        description: Paging index
+        in: query
+        name: current
+        required: true
+        type: integer
+      - default: 10
+        description: Paging Size
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - description: Role name (fuzzy query)
+        in: query
+        name: name
+        type: string
+      responses:
+        "200":
+          description: 'Search result: {list:List data,pagination:{current:Page index,pageSize:Page
+            size,total:Total number}}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.Role'
+            type: array
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query data
+      tags:
+      - Manage Role
+    post:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Create data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Role'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Role'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Create data
+      tags:
+      - Manage Role
+  /api/v1/roles.select:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      responses:
+        "200":
+          description: 'Search result: {list: Role list}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.Role'
+            type: array
+        "400":
+          description: '{error:{code:0,message: Unknown query type}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query selection data
+      tags:
+      - Manage Role
+  /api/v1/roles/{id}:
+    delete:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Delete data
+      tags:
+      - Manage Role
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Role'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "404":
+          description: '{error:{code:0,message:Resource does not exist.}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query specified data
+      tags:
+      - Manage Role
+    put:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.Role'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Role'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Update data
+      tags:
+      - Manage Role
+  /api/v1/users:
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - default: 1
+        description: Paging index
+        in: query
+        name: current
+        required: true
+        type: integer
+      - default: 10
+        description: Paging Size
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - description: Username (fuzzy query)
+        in: query
+        name: userName
+        type: string
+      - description: Real name (fuzzy query)
+        in: query
+        name: realName
+        type: string
+      - description: Role ID (multiple separated by commas)
+        in: query
+        name: roleIDs
+        type: string
+      - description: 'Status (1: Enable 2: Disable)'
+        in: query
+        name: status
+        type: integer
+      responses:
+        "200":
+          description: 'Search result: {list:List data,pagination:{current:Page index,pageSize:Page
+            size,total:Total number}}'
+          schema:
+            items:
+              $ref: '#/definitions/schema.UserShow'
+            type: array
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query data
+      tags:
+      - Manage Users
+    post:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Create data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.User'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.User'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Create data
+      tags:
+      - Manage Users
+  /api/v1/users/{id}:
+    delete:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Delete data
+      tags:
+      - Manage Users
+    get:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.User'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "404":
+          description: '{error:{code:0,message: Resource does not exist.}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Query specified data
+      tags:
+      - Manage Users
+    put:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schema.User'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.User'
+        "400":
+          description: '{error:{code:0,message: Invalid request parameter}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Update data
+      tags:
+      - Manage Users
+  /api/v1/users/{id}/disable:
+    patch:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Disable data
+      tags:
+      - Manage Users
+  /api/v1/users/{id}/enable:
+    patch:
+      parameters:
+      - description: Bearer User Token
+        in: header
+        name: Authorization
+        type: string
+      - description: Record ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{status:OK}'
+          schema:
+            $ref: '#/definitions/schema.HTTPStatus'
+        "401":
+          description: '{error:{code:0,message: Unauthorized}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+        "500":
+          description: '{error:{code:0,message: Server Error}}'
+          schema:
+            $ref: '#/definitions/schema.HTTPError'
+      summary: Enable data
+      tags:
+      - Manage Users
+schemes:
+- http
+- https
+swagger: "2.0"

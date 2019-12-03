@@ -1,0 +1,223 @@
+#Run mode (debug: debug, test: test, release: official)
+run_mode = "debug"
+
+# Static site directory (can also be specified with -www when starting the service)
+www = "www"
+
+# Swagger document directory (can also be specified with -swagger when starting the service)
+swagger = "docs/swagger"
+
+# Data storage (support: gorm)
+store = "gorm"
+
+# http Configuration
+[http]
+# http Listening address
+host = "0.0.0.0"
+# http listening port
+port = 8088
+# http Elegant Close Wait Timeout (in seconds)
+shutdown_timeout = 30
+
+# permission configuration
+[permission]
+# Use enable initialization permission data
+enable = true
+# Data file (json, can also be specified with -permission when starting the service)
+data = "menu.json"
+
+# i18n configuration
+[i18n]
+# Use enable initialization languages data
+enable = true
+# Default language
+default = "en"
+# Default language
+languages = ["en","uk"]
+# Data file (json, can also be specified with -permission when starting the service)
+data = "./configs/i18n/languages.json"
+# Use enable initialization languages data
+countries_enable = true
+# Data file (json, can also be specified with -permission when starting the service)
+countries_data = "./data/countries.json"
+
+
+# Casbin configuration
+[casbin]
+# Whether to enable casbin
+enable = true
+# Debug mode
+debug = false
+# Model configuration file (can also be specified with -m when starting the service)
+model = ""
+# Whether to enable periodic autoloading policies
+auto_load = false
+# Automatically load policy interval (in seconds)
+auto_load_internal = 10
+
+# Log configuration
+[log]
+# Log level (1: fatal 2: error, 3: warn, 4: info, 5: debug)
+level = 5
+# Log format (support output format: text/json)
+format = "text"
+# Log output (support: stdout/stderr/file)
+output = "stdout"
+# Specify the file path for log output
+output_file = "data/ginadmin.log"
+# Whether to enable log hooks
+enable_hook = false
+# Log hook (support: gorm)
+hook = "gorm"
+# The maximum number of worker threads written to the hook
+hook_max_thread = 1
+# The maximum number of buffers written to the hook
+hook_max_buffer = 512
+
+# Log gorm hook configuration
+[log_gorm_hook]
+# Database type (currently supported database type: mysql/sqlite3/postgres)
+db_type = "sqlite3"
+# Set the maximum time the connection can be reused (in seconds)
+max_lifetime = 7200
+# Set the maximum number of open connections for the database
+max_open_conns = 1
+# Set the maximum number of connections in the free connection pool
+max_idle_conns = 1
+# Database table name
+table = "g_logger"
+
+# Service monitoring(GOPS:https://github.com/google/gops)
+[monitor]
+# Whether to enable
+enable = false
+# HTTP listening address and port
+addr = "127.0.0.1:16060"
+# Configuration file directory (if empty, use the default directory)
+config_dir = ""
+
+# Root user
+[root]
+# Login Username
+user_name = "root"
+# Password
+password = "abc-123"
+# Real name displayed
+real_name = "Super administrator"
+
+# User authentication (jwt)
+[jwt_auth]
+# Signature method (support: HS512/HS384/HS512)
+signing_method = "HS512"
+# Signature key
+signing_key = "MAYCMS"
+# Expiration time (in seconds)
+expired = 7200
+# Storage (support: file/redis)
+store = "file"
+# file path
+file_path = "data/jwt_auth.db"
+# Redis database (if the storage method is redis, specify the stored database)
+redis_db = 10
+# Key name prefix stored in the redis database
+redis_prefix = "auth_"
+
+# Captcha
+[captcha]
+# Storage method (support: memory/redis)
+store = "memory"
+# Digital length
+length = 4
+# Image width
+width = 300
+# Picture height
+height = 120
+# Redis database (if the storage method is redis, specify the stored database)
+redis_db = 10
+# Key name prefix stored in the redis database
+redis_prefix = "captcha_"
+
+# Request frequency limit (use redis if redis is available, otherwise use memory storage)
+[rate_limiter]
+# Whether to enable
+enable = false
+# Maximum number of requests allowed per user per minute
+count = 300
+# Redis database (if the storage method is redis, specify the stored database)
+redis_db = 10
+
+# Cross-domain request
+[cors]
+# Whether to enable
+enable = false
+# List of domain names that allow cross-domain requests (* indicates all allowed)
+allow_origins = ["*"]
+# List of request methods that allow cross-domain requests
+allow_methods = ["GET","POST","PUT","DELETE","PATCH"]
+# List of non-simple headers that allow clients to use with cross-domain requests
+allow_headers = []
+# Whether the request can contain user credentials such as cookies, HTTP authentication or client SSL certificates
+allow_credentials = true
+# The time (in seconds) that the result of the preflight request can be cached
+max_age = 7200
+
+# Redis configuration
+[redis]
+# Address
+addr = "127.0.0.1:6379"
+# Password
+password = ""
+
+# Gorm configuration
+[gorm]
+# Whether to enable debug mode?
+debug = true
+# Database type (currently supported database type: mysql/sqlite3/postgres)
+db_type = "sqlite3"
+# Set the maximum time the connection can be reused (in seconds)
+max_lifetime = 7200
+# Set the maximum number of open connections for the database
+max_open_conns = 150
+# Set the maximum number of connections in the free connection pool
+max_idle_conns = 50
+# Database table name prefix
+table_prefix = "may_"
+# Whether to enable automatic mapping database table structure
+enable_auto_migrate = true
+
+# Mysql database configuration
+[mysql]
+# Connection address
+host = "127.0.0.1"
+# Connection port
+port= 3306
+# Username
+user = "maycms"
+# Password
+password = "maycms"
+# Database Name
+db_name = "maycms"
+# Connection parameter
+parameters = "charset=utf8mb4&parseTime=True&loc=Local&allowNativePasswords=true"
+
+# Postgres database configuration
+[postgres]
+# Connection address
+host = "127.0.0.1"
+# Connection port
+port= 5432
+# Username
+user = "maycms"
+# Password
+password = "maycms"
+# Database Name
+db_name = "maycms"
+# SSL mode
+ssl_mode = "disable"
+
+# Sqlite database configuration
+[sqlite3]
+# Database path
+path = "data/maycms.db"
+name = "MayCMS.db"
+dir = "data"

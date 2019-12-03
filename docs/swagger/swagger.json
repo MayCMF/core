@@ -1,0 +1,3307 @@
+{
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Serverless CMF with Full Rest API and RBAC(Role Base Control Access) System.",
+        "title": "MayCMF",
+        "contact": {
+            "name": "eneus"
+        },
+        "license": {},
+        "version": "0.1.0"
+    },
+    "host": "127.0.0.1:8088",
+    "basePath": "/",
+    "paths": {
+        "/api/v1/countries": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Query data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page Index",
+                        "name": "current",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Paging Size",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Numbering",
+                        "name": "code",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Status (1: Enable 2: Disable)",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list:List data,pagination:{current:Page index, pageSize: Page size, total: The total number}}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.Country"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Create data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Create data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Country"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Country"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/countries/{code}": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Query specified data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Country"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "{error:{code:0,message: Resource does not exist.}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Update data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Country"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Country"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Delete data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/language": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Query data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page Index",
+                        "name": "current",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Paging Size",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Numbering",
+                        "name": "code",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Status (1: Enable 2: Disable)",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list:List data,pagination:{current:Page index, pageSize: Page size, total: The total number}}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.Language"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Create data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Create data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Language"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Language"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/language/{code}": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Query specified data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Language"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "{error:{code:0,message: Resource does not exist.}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Update data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Language"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Language"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Delete data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/language/{code}/disable": {
+            "patch": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Disable data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status: OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/language/{code}/enable": {
+            "patch": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Enable data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/node": {
+            "get": {
+                "tags": [
+                    "Node"
+                ],
+                "summary": "Query data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page Index",
+                        "name": "current",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Paging Size",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Numbering",
+                        "name": "code",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Status (1: Enable 2: Disable)",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list:List data,pagination:{current:Page index, pageSize: Page size, total: The total number}}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.Node"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Node"
+                ],
+                "summary": "Create data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Create data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Node"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Node"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/node/{id}": {
+            "get": {
+                "tags": [
+                    "Node"
+                ],
+                "summary": "Query specified data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Node"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "{error:{code:0,message: Resource does not exist.}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Node"
+                ],
+                "summary": "Update data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Node"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Node"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Node"
+                ],
+                "summary": "Delete data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/permissions": {
+            "get": {
+                "tags": [
+                    "Manage Permission"
+                ],
+                "summary": "Query data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Paging index",
+                        "name": "current",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Paging Size",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Hide permission (0: don't hide 1: hide)",
+                        "name": "hidden",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Parent ID",
+                        "name": "parentID",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list:List data,pagination:{current:Page index,pageSize:Page size,total:total number}}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.Permission"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Manage Permission"
+                ],
+                "summary": "Create data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Create data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Permission"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Permission"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/permissions.tree": {
+            "get": {
+                "tags": [
+                    "Manage Permission"
+                ],
+                "summary": "Query permission tree",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Whether to include action data (1 is)",
+                        "name": "includeActions",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Whether to include resource data (1 is)",
+                        "name": "includeResources",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list: List data}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.PermissionTree"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/permissions/{id}": {
+            "get": {
+                "tags": [
+                    "Manage Permission"
+                ],
+                "summary": "Query specified data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Permission"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "{error:{code:0,message:Resource does not exist.}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Manage Permission"
+                ],
+                "summary": "Update data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Permission"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Permission"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Manage Permission"
+                ],
+                "summary": "Delete data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/primitives": {
+            "get": {
+                "tags": [
+                    "Primitive"
+                ],
+                "summary": "Query data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page Index",
+                        "name": "current",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Paging Size",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Numbering",
+                        "name": "code",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Status (1: Enable 2: Disable)",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list:List data,pagination:{current:Page index, pageSize: Page size, total: The total number}}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.Primitive"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Primitive"
+                ],
+                "summary": "Create data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Create data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Primitive"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Primitive"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/primitives/{id}": {
+            "get": {
+                "tags": [
+                    "Primitive"
+                ],
+                "summary": "Query specified data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Primitive"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "{error:{code:0,message: Resource does not exist.}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Primitive"
+                ],
+                "summary": "Update data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Primitive"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Primitive"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Primitive"
+                ],
+                "summary": "Delete data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pub/current/password": {
+            "put": {
+                "tags": [
+                    "Manage Login"
+                ],
+                "summary": "Update personal password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Request parameter",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.UpdatePasswordParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pub/current/permissiontree": {
+            "get": {
+                "tags": [
+                    "Manage Login"
+                ],
+                "summary": "Query current user permission tree",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list:Permission tree}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Permission"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pub/current/user": {
+            "get": {
+                "tags": [
+                    "Manage Login"
+                ],
+                "summary": "Get current user information",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.UserLoginInfo"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pub/login": {
+            "post": {
+                "tags": [
+                    "Manage Login"
+                ],
+                "summary": "User login",
+                "parameters": [
+                    {
+                        "description": "Request parameter",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.LoginParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.LoginTokenInfo"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pub/login/captcha": {
+            "get": {
+                "produces": [
+                    "image/png"
+                ],
+                "tags": [
+                    "Manage Login"
+                ],
+                "summary": "Response graphic verification code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Verification code ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Reload",
+                        "name": "reload",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Captcha"
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pub/login/captchaid": {
+            "get": {
+                "tags": [
+                    "Manage Login"
+                ],
+                "summary": "Get verification code information",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.LoginCaptcha"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pub/login/exit": {
+            "post": {
+                "tags": [
+                    "Manage Login"
+                ],
+                "summary": "User logout",
+                "responses": {
+                    "200": {
+                        "description": "{status: OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/pub/refresh-token": {
+            "post": {
+                "tags": [
+                    "Manage Login"
+                ],
+                "summary": "Refresh token",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.LoginTokenInfo"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/roles": {
+            "get": {
+                "tags": [
+                    "Manage Role"
+                ],
+                "summary": "Query data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Paging index",
+                        "name": "current",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Paging Size",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Role name (fuzzy query)",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list:List data,pagination:{current:Page index,pageSize:Page size,total:Total number}}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.Role"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Manage Role"
+                ],
+                "summary": "Create data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Create data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Role"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Role"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/roles.select": {
+            "get": {
+                "tags": [
+                    "Manage Role"
+                ],
+                "summary": "Query selection data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list: Role list}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.Role"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Unknown query type}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Manage Role"
+                ],
+                "summary": "Query specified data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Role"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "{error:{code:0,message:Resource does not exist.}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Manage Role"
+                ],
+                "summary": "Update data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.Role"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.Role"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Manage Role"
+                ],
+                "summary": "Delete data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "tags": [
+                    "Manage Users"
+                ],
+                "summary": "Query data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Paging index",
+                        "name": "current",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Paging Size",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Username (fuzzy query)",
+                        "name": "userName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Real name (fuzzy query)",
+                        "name": "realName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Role ID (multiple separated by commas)",
+                        "name": "roleIDs",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Status (1: Enable 2: Disable)",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Search result: {list:List data,pagination:{current:Page index,pageSize:Page size,total:Total number}}",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/schema.UserShow"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Manage Users"
+                ],
+                "summary": "Create data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Create data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.User"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "tags": [
+                    "Manage Users"
+                ],
+                "summary": "Query specified data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.User"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "{error:{code:0,message: Resource does not exist.}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Manage Users"
+                ],
+                "summary": "Update data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/schema.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/schema.User"
+                        }
+                    },
+                    "400": {
+                        "description": "{error:{code:0,message: Invalid request parameter}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Manage Users"
+                ],
+                "summary": "Delete data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}/disable": {
+            "patch": {
+                "tags": [
+                    "Manage Users"
+                ],
+                "summary": "Disable data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}/enable": {
+            "patch": {
+                "tags": [
+                    "Manage Users"
+                ],
+                "summary": "Enable data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer User Token",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{status:OK}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPStatus"
+                        }
+                    },
+                    "401": {
+                        "description": "{error:{code:0,message: Unauthorized}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "{error:{code:0,message: Server Error}}",
+                        "schema": {
+                            "$ref": "#/definitions/schema.HTTPError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "schema.Country": {
+            "type": "object",
+            "required": [
+                "code",
+                "name"
+            ],
+            "properties": {
+                "capital": {
+                    "description": "Country's Capital",
+                    "type": "string"
+                },
+                "code": {
+                    "description": "Country's Code",
+                    "type": "string"
+                },
+                "continent": {
+                    "description": "Continent where country located",
+                    "type": "string"
+                },
+                "currency": {
+                    "description": "Country's Currency",
+                    "type": "string"
+                },
+                "emoji": {
+                    "description": "Emoji flag",
+                    "type": "string"
+                },
+                "emojiU": {
+                    "description": "Emoji flag",
+                    "type": "string"
+                },
+                "languages": {
+                    "description": "Used languages",
+                    "type": "string"
+                },
+                "latlng": {
+                    "description": "Country's geo center",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Native",
+                    "type": "string"
+                },
+                "native": {
+                    "description": "Native language",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Phone number",
+                    "type": "string"
+                },
+                "timezones": {
+                    "description": "Country's timezones",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.HTTPError": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "Error item",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.HTTPErrorItem"
+                }
+            }
+        },
+        "schema.HTTPErrorItem": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error code",
+                    "type": "integer"
+                },
+                "message": {
+                    "description": "Error message",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.HTTPStatus": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "description": "status(OK)",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.Language": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "active": {
+                    "description": "Status language can be added as content",
+                    "type": "boolean"
+                },
+                "code": {
+                    "description": "Code",
+                    "type": "string"
+                },
+                "default": {
+                    "description": "Default language for project",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Name",
+                    "type": "string"
+                },
+                "native": {
+                    "description": "Remarks",
+                    "type": "string"
+                },
+                "rtl": {
+                    "description": "RTL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "schema.LoginCaptcha": {
+            "type": "object",
+            "properties": {
+                "captcha_id": {
+                    "description": "Verification code ID",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.LoginParam": {
+            "type": "object",
+            "required": [
+                "captcha_code",
+                "captcha_id",
+                "password",
+                "user_name"
+            ],
+            "properties": {
+                "captcha_code": {
+                    "description": "Verification code",
+                    "type": "string"
+                },
+                "captcha_id": {
+                    "description": "Verification code ID",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Password (md5 encryption)",
+                    "type": "string"
+                },
+                "user_name": {
+                    "description": "UserName",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.LoginTokenInfo": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "description": "Access token",
+                    "type": "string"
+                },
+                "expires_at": {
+                    "description": "Token expiration timestamp",
+                    "type": "integer"
+                },
+                "token_type": {
+                    "description": "Token type",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.Node": {
+            "type": "object",
+            "required": [
+                "uid"
+            ],
+            "properties": {
+                "created_at": {
+                    "description": "Creation time",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Node ID",
+                    "type": "integer"
+                },
+                "parent": {
+                    "description": "Parent",
+                    "type": "string"
+                },
+                "parent_path": {
+                    "description": "Parent path",
+                    "type": "string"
+                },
+                "primitive": {
+                    "description": "Primitive Slug",
+                    "type": "string"
+                },
+                "references": {
+                    "description": "References in JSON Format with reference fields and Primitives",
+                    "type": "string"
+                },
+                "slug": {
+                    "description": "Slug short machine name",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Node status (Published: 1, Draft: 0)",
+                    "type": "integer"
+                },
+                "uid": {
+                    "description": "User ID",
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "description": "Updated time",
+                    "type": "string"
+                },
+                "uuid": {
+                    "description": "UUID",
+                    "type": "string"
+                },
+                "variations": {
+                    "description": "Node Body with Languages",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.NodeBodies"
+                }
+            }
+        },
+        "schema.NodeBodies": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "language",
+                    "title"
+                ],
+                "properties": {
+                    "body": {
+                        "description": "Node Body",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Creation time",
+                        "type": "string"
+                    },
+                    "language": {
+                        "description": "Language Code Identifier",
+                        "type": "string"
+                    },
+                    "nid": {
+                        "description": "Node Slug",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Node Title",
+                        "type": "string"
+                    },
+                    "uid": {
+                        "description": "User ID",
+                        "type": "integer"
+                    },
+                    "updated_at": {
+                        "description": "Updated time",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "schema.NodeBody": {
+            "type": "object",
+            "required": [
+                "language",
+                "title"
+            ],
+            "properties": {
+                "body": {
+                    "description": "Node Body",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "Creation time",
+                    "type": "string"
+                },
+                "language": {
+                    "description": "Language Code Identifier",
+                    "type": "string"
+                },
+                "nid": {
+                    "description": "Node Slug",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Node Title",
+                    "type": "string"
+                },
+                "uid": {
+                    "description": "User ID",
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "description": "Updated time",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.Permission": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "actions": {
+                    "description": "Action list",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.PermissionActions"
+                },
+                "created_at": {
+                    "description": "Creation time",
+                    "type": "string"
+                },
+                "creator": {
+                    "description": "Creator",
+                    "type": "string"
+                },
+                "hidden": {
+                    "description": "Hide Permission (0: don't hide 1: hide)",
+                    "type": "integer"
+                },
+                "icon": {
+                    "description": "Permission icon",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Permission name",
+                    "type": "string"
+                },
+                "parent_id": {
+                    "description": "Parent ID",
+                    "type": "string"
+                },
+                "parent_path": {
+                    "description": "Parent path",
+                    "type": "string"
+                },
+                "record_id": {
+                    "description": "Record ID",
+                    "type": "string"
+                },
+                "resources": {
+                    "description": "Resource list",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.PermissionResources"
+                },
+                "router": {
+                    "description": "Access routing",
+                    "type": "string"
+                },
+                "sequence": {
+                    "description": "Sort value",
+                    "type": "integer"
+                }
+            }
+        },
+        "schema.PermissionAction": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Action number",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Action name",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.PermissionActions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "description": "Action number",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Action name",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "schema.PermissionResource": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Resource number",
+                    "type": "string"
+                },
+                "method": {
+                    "description": "Request method",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Resource Name",
+                    "type": "string"
+                },
+                "path": {
+                    "description": "Request path",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.PermissionResources": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "description": "Resource number",
+                        "type": "string"
+                    },
+                    "method": {
+                        "description": "Request method",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Resource Name",
+                        "type": "string"
+                    },
+                    "path": {
+                        "description": "Request path",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "schema.PermissionTree": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "actions": {
+                    "description": "Action list",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.PermissionActions"
+                },
+                "children": {
+                    "description": "Child tree",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schema.PermissionTree"
+                    }
+                },
+                "hidden": {
+                    "description": "Hide Permission (0: don't hide 1: hide)",
+                    "type": "integer"
+                },
+                "icon": {
+                    "description": "Permission icon",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Permission name",
+                    "type": "string"
+                },
+                "parent_id": {
+                    "description": "Parent ID",
+                    "type": "string"
+                },
+                "parent_path": {
+                    "description": "Parent path",
+                    "type": "string"
+                },
+                "record_id": {
+                    "description": "Record ID",
+                    "type": "string"
+                },
+                "resources": {
+                    "description": "Resource list",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.PermissionResources"
+                },
+                "router": {
+                    "description": "Access routing",
+                    "type": "string"
+                },
+                "sequence": {
+                    "description": "Sort value",
+                    "type": "integer"
+                }
+            }
+        },
+        "schema.Primitive": {
+            "type": "object",
+            "required": [
+                "parent",
+                "slug",
+                "uid"
+            ],
+            "properties": {
+                "created_at": {
+                    "description": "Creation time",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Primitive ID",
+                    "type": "integer"
+                },
+                "options": {
+                    "description": "Options in Jeson Format",
+                    "type": "string"
+                },
+                "parent": {
+                    "description": "Parent",
+                    "type": "string"
+                },
+                "parent_path": {
+                    "description": "Parent path",
+                    "type": "string"
+                },
+                "slug": {
+                    "description": "Slug short machine name",
+                    "type": "string"
+                },
+                "uid": {
+                    "description": "User ID",
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "description": "Updated time",
+                    "type": "string"
+                },
+                "uuid": {
+                    "description": "UUID",
+                    "type": "string"
+                },
+                "variations": {
+                    "description": "Primitive Body with Languages",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.Variations"
+                }
+            }
+        },
+        "schema.PrimitiveBody": {
+            "type": "object",
+            "required": [
+                "language",
+                "title"
+            ],
+            "properties": {
+                "body": {
+                    "description": "Primitive Body",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "Creation time",
+                    "type": "string"
+                },
+                "language": {
+                    "description": "Language Code Identifier",
+                    "type": "string"
+                },
+                "slug": {
+                    "description": "Primitive Slug",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Primitive Title",
+                    "type": "string"
+                },
+                "uid": {
+                    "description": "User ID",
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "description": "Updated time",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.Role": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "created_at": {
+                    "description": "Creation time",
+                    "type": "string"
+                },
+                "creator": {
+                    "description": "Creator",
+                    "type": "string"
+                },
+                "memo": {
+                    "description": "Remarks",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Role Name",
+                    "type": "string"
+                },
+                "permissions": {
+                    "description": "Permission permission",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.RolePermissions"
+                },
+                "record_id": {
+                    "description": "Record ID",
+                    "type": "string"
+                },
+                "sequence": {
+                    "description": "Sort value",
+                    "type": "integer"
+                }
+            }
+        },
+        "schema.RolePermission": {
+            "type": "object",
+            "properties": {
+                "actions": {
+                    "description": "Action permission list",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "permission_id": {
+                    "description": "Permission ID",
+                    "type": "string"
+                },
+                "resources": {
+                    "description": "Resource permission list",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "schema.RolePermissions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "actions": {
+                        "description": "Action permission list",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "permission_id": {
+                        "description": "Permission ID",
+                        "type": "string"
+                    },
+                    "resources": {
+                        "description": "Resource permission list",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "schema.UpdatePasswordParam": {
+            "type": "object",
+            "required": [
+                "new_password",
+                "old_password"
+            ],
+            "properties": {
+                "new_password": {
+                    "description": "Old password (md5 encryption)",
+                    "type": "string"
+                },
+                "old_password": {
+                    "description": "Old password (md5 encryption)",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.User": {
+            "type": "object",
+            "required": [
+                "real_name",
+                "status",
+                "user_name"
+            ],
+            "properties": {
+                "created_at": {
+                    "description": "Creation time",
+                    "type": "string"
+                },
+                "creator": {
+                    "description": "Creator",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Email",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Password",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Phone number",
+                    "type": "string"
+                },
+                "real_name": {
+                    "description": "RealName",
+                    "type": "string"
+                },
+                "record_id": {
+                    "description": "Record ID",
+                    "type": "string"
+                },
+                "roles": {
+                    "description": "Role authorization",
+                    "type": "object",
+                    "$ref": "#/definitions/schema.UserRoles"
+                },
+                "status": {
+                    "description": "User Status (1: Enable 2: Disable)",
+                    "type": "integer"
+                },
+                "user_name": {
+                    "description": "UserName",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.UserLoginInfo": {
+            "type": "object",
+            "properties": {
+                "real_name": {
+                    "description": "RealName",
+                    "type": "string"
+                },
+                "role_names": {
+                    "description": "List of role names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "user_name": {
+                    "description": "UserName",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.UserRole": {
+            "type": "object",
+            "properties": {
+                "role_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "schema.UserRoles": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "role_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "schema.UserShow": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "description": "Creation time",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Email",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Phone",
+                    "type": "string"
+                },
+                "real_name": {
+                    "description": "RealName",
+                    "type": "string"
+                },
+                "record_id": {
+                    "description": "Record ID",
+                    "type": "string"
+                },
+                "roles": {
+                    "description": "Roles List",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schema.Role"
+                    }
+                },
+                "status": {
+                    "description": "User Status (1: Enable 2: Disable)",
+                    "type": "integer"
+                },
+                "user_name": {
+                    "description": "UserName",
+                    "type": "string"
+                }
+            }
+        },
+        "schema.Variations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "language",
+                    "title"
+                ],
+                "properties": {
+                    "body": {
+                        "description": "Primitive Body",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Creation time",
+                        "type": "string"
+                    },
+                    "language": {
+                        "description": "Language Code Identifier",
+                        "type": "string"
+                    },
+                    "slug": {
+                        "description": "Primitive Slug",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Primitive Title",
+                        "type": "string"
+                    },
+                    "uid": {
+                        "description": "User ID",
+                        "type": "integer"
+                    },
+                    "updated_at": {
+                        "description": "Updated time",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

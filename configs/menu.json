@@ -1,0 +1,231 @@
+[
+  {
+    "name": "Home",
+    "icon": "dashboard",
+    "router": "/dashboard",
+    "sequence": 1900000
+  },
+  {
+    "name": "Example",
+    "icon": "tag",
+    "router": "/example/example",
+    "sequence": 1800000,
+    "actions": [
+      { "code": "add", "name": "New" },
+      { "code": "edit", "name": "Edit" },
+      { "code": "del", "name": "Delete" },
+      { "code": "query", "name": "Query" },
+      { "code": "disable", "name": "Disable" },
+      { "code": "enable", "name": "Enable" }
+    ],
+    "resources": [
+      {
+        "code": "query",
+        "name": "Query Example data",
+        "method": "GET",
+        "path": "/api/v1/example"
+      },
+      {
+        "code": "get",
+        "name": "Get Example Data by ID",
+        "method": "GET",
+        "path": "/api/v1/example/:id"
+      },
+      {
+        "code": "create",
+        "name": "Create Example data",
+        "method": "POST",
+        "path": "/api/v1/example"
+      },
+      {
+        "code": "update",
+        "name": "Update Example data",
+        "method": "PUT",
+        "path": "/api/v1/example/:id"
+      },
+      {
+        "code": "delete",
+        "name": "Delete Example data",
+        "method": "DELETE",
+        "path": "/api/v1/example/:id"
+      },
+      {
+        "code": "disable",
+        "name": "Disable Example data",
+        "method": "PATCH",
+        "path": "/api/v1/example/:id/disable"
+      },
+      {
+        "code": "enable",
+        "name": "Enable Example data",
+        "method": "PATCH",
+        "path": "/api/v1/example/:id/enable"
+      }
+    ]
+  },
+  {
+    "name": "Settings",
+    "icon": "setting",
+    "sequence": 1100000,
+    "children": [
+      {
+        "name": "Permission Manager",
+        "icon": "solution",
+        "router": "/system/menu",
+        "sequence": 1190000,
+        "actions": [
+          { "code": "add", "name": "New" },
+          { "code": "edit", "name": "Edit" },
+          { "code": "del", "name": "Delete" },
+          { "code": "query", "name": "Query" }
+        ],
+        "resources": [
+          {
+            "code": "query",
+            "name": "Get Permissions",
+            "method": "GET",
+            "path": "/api/v1/permissions"
+          },
+          {
+            "code": "get",
+            "name": "Get Permission by ID",
+            "method": "GET",
+            "path": "/api/v1/permissions/:id"
+          },
+          {
+            "code": "create",
+            "name": "Create Permission",
+            "method": "POST",
+            "path": "/api/v1/permissions"
+          },
+          {
+            "code": "update",
+            "name": "Update Permissions",
+            "method": "PUT",
+            "path": "/api/v1/permissions/:id"
+          },
+          {
+            "code": "delete",
+            "name": "Remove permissions",
+            "method": "DELETE",
+            "path": "/api/v1/permissions/:id"
+          }
+        ]
+      },
+      {
+        "name": "Role Manager",
+        "icon": "audit",
+        "router": "/system/role",
+        "sequence": 1180000,
+        "actions": [
+          { "code": "add", "name": "New" },
+          { "code": "edit", "name": "Edit" },
+          { "code": "del", "name": "Delete" },
+          { "code": "query", "name": "Query" }
+        ],
+        "resources": [
+          {
+            "code": "query",
+            "name": "Get roles list",
+            "method": "GET",
+            "path": "/api/v1/roles"
+          },
+          {
+            "code": "get",
+            "name": "Get role by ID",
+            "method": "GET",
+            "path": "/api/v1/roles/:id"
+          },
+          {
+            "code": "create",
+            "name": "Create Role",
+            "method": "POST",
+            "path": "/api/v1/roles"
+          },
+          {
+            "code": "update",
+            "name": "Update Role",
+            "method": "PUT",
+            "path": "/api/v1/roles/:id"
+          },
+          {
+            "code": "delete",
+            "name": "Delete Role",
+            "method": "DELETE",
+            "path": "/api/v1/roles/:id"
+          },
+          {
+            "code": "queryMenu",
+            "name": "Get menu list",
+            "method": "GET",
+            "path": "/api/v1/menus"
+          }
+        ]
+      },
+      {
+        "name": "User Management",
+        "icon": "user",
+        "router": "/system/user",
+        "sequence": 1170000,
+        "actions": [
+          { "code": "add", "name": "New" },
+          { "code": "edit", "name": "Edit" },
+          { "code": "del", "name": "Delete" },
+          { "code": "query", "name": "Query" },
+          { "code": "disable", "name": "Disable" },
+          { "code": "enable", "name": "Enable" }
+        ],
+        "resources": [
+          {
+            "code": "query",
+            "name": "Get user data",
+            "method": "GET",
+            "path": "/api/v1/users"
+          },
+          {
+            "code": "get",
+            "name": "Get user data by ID",
+            "method": "GET",
+            "path": "/api/v1/users/:id"
+          },
+          {
+            "code": "create",
+            "name": "Create user",
+            "method": "POST",
+            "path": "/api/v1/users"
+          },
+          {
+            "code": "update",
+            "name": "Update user",
+            "method": "PUT",
+            "path": "/api/v1/users/:id"
+          },
+          {
+            "code": "delete",
+            "name": "Delete user",
+            "method": "DELETE",
+            "path": "/api/v1/users/:id"
+          },
+          {
+            "code": "disable",
+            "name": "Disable user",
+            "method": "PATCH",
+            "path": "/api/v1/users/:id/disable"
+          },
+          {
+            "code": "enable",
+            "name": "Enable user",
+            "method": "PATCH",
+            "path": "/api/v1/users/:id/enable"
+          },
+          {
+            "code": "queryRole",
+            "name": "Query uder role",
+            "method": "GET",
+            "path": "/api/v1/roles"
+          }
+        ]
+      }
+    ]
+  }
+]
