@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/MayCMF/core/src/common/entity"
-	"github.com/MayCMF/src/filemanager/schema"
+	"github.com/MayCMF/core/src/filemanager/schema"
 	"github.com/jinzhu/gorm"
 )
 
@@ -19,12 +19,12 @@ type SchemaFile schema.File
 // ToFile - Convert to File entity
 func (a SchemaFile) ToFile() *File {
 	item := &File{
-		UUID:      a.UUID,
-		UID:       &a.UID,
-		Filename:  &a.Filename,
-		Uri:       &a.Uri,
-		Filemime:  &a.Filemime,
-		Filesize:  &a.Filesize,
+		UUID:     a.UUID,
+		UID:      &a.UID,
+		Filename: &a.Filename,
+		Uri:      &a.Uri,
+		Filemime: &a.Filemime,
+		Filesize: a.Filesize,
 	}
 	return item
 }
@@ -32,12 +32,12 @@ func (a SchemaFile) ToFile() *File {
 // File - File entity
 type File struct {
 	entity.Model
-	UUID      string  `gorm:"column:uuid;size:36;index;"`       // UUID code
-	UID       *uint `gorm:"column:uid;size:50;index;"`          // User ID
-	Filename  *string `gorm:"column:filename;size:100;index;"`  // File Name
-	Uri       *string `gorm:"column:uri;size:200;"`             // File URI
-	Filemime  *int    `gorm:"column:filemime;index;"`           // Filemime (image/jpeg, application/msword etc)
-	Filesize  *string `gorm:"column:filesize;size:100;"`        // Filesize in bytes
+	UUID     string  `gorm:"column:uuid;size:36;index;"`      // UUID code
+	UID      *uint   `gorm:"column:uid;size:50;index;"`       // User ID
+	Filename *string `gorm:"column:filename;size:100;index;"` // File Name
+	Uri      *string `gorm:"column:uri;size:200;"`            // File URI
+	Filemime *string `gorm:"column:filemime;index;"`          // Filemime (image/jpeg, application/msword etc)
+	Filesize uint64  `gorm:"column:filesize;size:100;"`       // Filesize in bytes
 }
 
 func (a File) String() string {
@@ -52,13 +52,12 @@ func (a File) TableName() string {
 // ToSchemaFile - Convert to File object
 func (a File) ToSchemaFile() *schema.File {
 	item := &schema.File{
-		UUID:      a.UUID,
-		UID:       *a.UID,
-		Filename:  *a.Filename,
-		Uri:       *a.Uri,
-		Filemime:  *a.Filemime,
-		Filesize:  *a.Filesize,
-		CreatedAt: a.CreatedAt,
+		UUID:     a.UUID,
+		UID:      *a.UID,
+		Filename: *a.Filename,
+		Uri:      *a.Uri,
+		Filemime: *a.Filemime,
+		Filesize: a.Filesize,
 	}
 	return item
 }

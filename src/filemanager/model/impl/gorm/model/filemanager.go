@@ -5,8 +5,8 @@ import (
 
 	"github.com/MayCMF/core/src/common/errors"
 	"github.com/MayCMF/core/src/common/model"
-	"github.com/MayCMF/src/filemanager/model/impl/gorm/entity"
-	"github.com/MayCMF/src/filemanager/schema"
+	"github.com/MayCMF/core/src/filemanager/model/impl/gorm/entity"
+	"github.com/MayCMF/core/src/filemanager/schema"
 	"github.com/jinzhu/gorm"
 )
 
@@ -37,7 +37,7 @@ func (a *File) Query(ctx context.Context, params schema.FileQueryParam, opts ...
 	if v := params.LikeFilename; v != "" {
 		db = db.Where("filename LIKE ?", "%"+v+"%")
 	}
-	if v := params.Uri; v > 0 {
+	if v := params.Uri; v != "" {
 		db = db.Where("uri=?", v)
 	}
 	db = db.Order("id DESC")
@@ -98,4 +98,3 @@ func (a *File) Delete(ctx context.Context, UUID string) error {
 	}
 	return nil
 }
-

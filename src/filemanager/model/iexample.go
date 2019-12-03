@@ -3,19 +3,19 @@ package model
 import (
 	"context"
 
-	"github.com/MayCMF/src/filemanager/schema"
+	"github.com/MayCMF/core/src/filemanager/schema"
 )
 
-// IExample Example storage interface
-type IExample interface {
+// IFile File storage interface
+type IFile interface {
 	// Query data
-	Query(ctx context.Context, params schema.ExampleQueryParam, opts ...schema.ExampleQueryOptions) (*schema.ExampleQueryResult, error)
+	Query(ctx context.Context, params schema.FileQueryParam, opts ...schema.FileQueryOptions) (*schema.FileQueryResult, error)
 	// Query specified data
-	Get(ctx context.Context, UUID string, opts ...schema.ExampleQueryOptions) (*schema.Example, error)
+	Get(ctx context.Context, UUID string, opts ...schema.FileQueryOptions) (*schema.File, error)
 	// Create data
-	Create(ctx context.Context, item schema.Example) error
+	Create(ctx context.Context, item schema.File) error
 	// Update data
-	Update(ctx context.Context, UUID string, item schema.Example) error
+	Update(ctx context.Context, UUID string, item schema.File) error
 	// Delete data
 	Delete(ctx context.Context, UUID string) error
 }

@@ -2,9 +2,8 @@ package controllers
 
 import (
 	"github.com/MayCMF/core/src/common/ginplus"
-	"github.com/MayCMF/core/src/common/util"
-	"github.com/MayCMF/src/filemanager/controllers"
-	"github.com/MayCMF/src/filemanager/schema"
+	"github.com/MayCMF/core/src/filemanager/controllers"
+	"github.com/MayCMF/core/src/filemanager/schema"
 	"github.com/gin-gonic/gin"
 )
 
@@ -26,7 +25,7 @@ type File struct {
 // @Param Authorization header string false "Bearer User Token"
 // @Param current query int true "Page Index" default(1)
 // @Param pageSize query int true "Paging Size" default(10)
-// @Param code query string false "Numbering"
+// @Param filename query string false "Numbering"
 // @Param name query string false "Name"
 // @Param status query int false "Status (1: Enable 2: Disable)"
 // @Success 200 {array} schema.File "Search result: {list:List data,pagination:{current:Page index, pageSize: Page size, total: The total number}}"
@@ -35,9 +34,9 @@ type File struct {
 // @Router /api/v1/file [get]
 func (a *File) Query(c *gin.Context) {
 	var params schema.FileQueryParam
-	params.LikeCode = c.Query("code")
-	params.LikeName = c.Query("name")
-	params.Status = util.S(c.Query("status")).DefaultInt(0)
+	params.Filename = c.Query("filename")
+	params.LikeFilename = c.Query("filename")
+	params.Uri = c.Query("uri")
 
 	result, err := a.FileBll.Query(ginplus.NewContext(c), params, schema.FileQueryOptions{
 		PageParam: ginplus.GetPaginationParam(c),
@@ -86,7 +85,7 @@ func (a *File) Create(c *gin.Context) {
 		return
 	}
 
-	item.Creator = ginplus.GetUserUUID(c)
+	// item.UID = ginplus.GetUserID(c)
 	nitem, err := a.FileBll.Create(ginplus.NewContext(c), item)
 	if err != nil {
 		ginplus.ResError(c, err)

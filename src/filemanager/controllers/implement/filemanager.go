@@ -6,8 +6,8 @@ import (
 	"github.com/MayCMF/core/src/common/errors"
 	commonschema "github.com/MayCMF/core/src/common/schema"
 	"github.com/MayCMF/core/src/common/util"
-	"github.com/MayCMF/src/filemanager/model"
-	"github.com/MayCMF/src/filemanager/schema"
+	"github.com/MayCMF/core/src/filemanager/model"
+	"github.com/MayCMF/core/src/filemanager/schema"
 )
 
 // NewFile - Create a File
@@ -39,9 +39,9 @@ func (a *File) Get(ctx context.Context, UUID string, opts ...schema.FileQueryOpt
 	return item, nil
 }
 
-func (a *File) checkCode(ctx context.Context, code string) error {
+func (a *File) checkFilename(ctx context.Context, filename string) error {
 	result, err := a.FileModel.Query(ctx, schema.FileQueryParam{
-		Code: code,
+		Filename: filename,
 	}, schema.FileQueryOptions{
 		PageParam: &commonschema.PaginationParam{PageSize: -1},
 	})
@@ -59,7 +59,7 @@ func (a *File) getUpdate(ctx context.Context, UUID string) (*schema.File, error)
 
 // Create - Create File data
 func (a *File) Create(ctx context.Context, item schema.File) (*schema.File, error) {
-	err := a.checkCode(ctx, item.Code)
+	err := a.checkFilename(ctx, item.Filename)
 	if err != nil {
 		return nil, err
 	}
@@ -79,8 +79,8 @@ func (a *File) Update(ctx context.Context, UUID string, item schema.File) (*sche
 		return nil, err
 	} else if oldItem == nil {
 		return nil, errors.ErrNotFound
-	} else if oldItem.Code != item.Code {
-		err := a.checkCode(ctx, item.Code)
+	} else if oldItem.Filename != item.Filename {
+		err := a.checkFilename(ctx, item.Filename)
 		if err != nil {
 			return nil, err
 		}
@@ -104,4 +104,3 @@ func (a *File) Delete(ctx context.Context, UUID string) error {
 
 	return a.FileModel.Delete(ctx, UUID)
 }
-

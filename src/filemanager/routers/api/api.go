@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/MayCMF/core/src/common/middleware"
-	"github.com/MayCMF/src/filemanager/routers/api/controllers"
+	"github.com/MayCMF/core/src/filemanager/routers/api/controllers"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
 )
@@ -15,7 +15,7 @@ func RegisterRouter(app *gin.Engine, container *dig.Container) error {
 	}
 
 	return container.Invoke(func(
-		cDemo *controllers.Demo,
+		cFile *controllers.File,
 	) error {
 
 		g := app.Group("/api")
@@ -26,16 +26,14 @@ func RegisterRouter(app *gin.Engine, container *dig.Container) error {
 		v1 := g.Group("/v1")
 		{
 
-			// [REGISTERED]/api/v1/example
-			gDemo := v1.Group("example")
+			// [REGISTERED]/api/v1/file
+			gFile := v1.Group("file")
 			{
-				gDemo.GET("", cDemo.Query)
-				gDemo.GET(":id", cDemo.Get)
-				gDemo.POST("", cDemo.Create)
-				gDemo.PUT(":id", cDemo.Update)
-				gDemo.DELETE(":id", cDemo.Delete)
-				gDemo.PATCH(":id/enable", cDemo.Enable)
-				gDemo.PATCH(":id/disable", cDemo.Disable)
+				gFile.GET("", cFile.Query)
+				gFile.GET(":id", cFile.Get)
+				gFile.POST("", cFile.Create)
+				gFile.PUT(":id", cFile.Update)
+				gFile.DELETE(":id", cFile.Delete)
 			}
 		}
 

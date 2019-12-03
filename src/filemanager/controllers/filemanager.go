@@ -3,7 +3,7 @@ package controllers
 import (
 	"context"
 
-	"github.com/MayCMF/src/filemanager/schema"
+	"github.com/MayCMF/core/src/filemanager/schema"
 )
 
 // IFile - File business logic interface
@@ -18,6 +18,4 @@ type IFile interface {
 	Update(ctx context.Context, UUID string, item schema.File) (*schema.File, error)
 	// Delete data
 	Delete(ctx context.Context, UUID string) error
-	// Update status
-	UpdateStatus(ctx context.Context, UUID string, status int) error
 }

@@ -1,10 +1,10 @@
 package filemanager
 
 import (
-	"github.com/MayCMF/src/filemanager/controllers"
-	"github.com/MayCMF/src/filemanager/controllers/implement"
-	"github.com/MayCMF/src/filemanager/model"
-	imodel "github.com/MayCMF/src/filemanager/model/impl/gorm/model"
+	"github.com/MayCMF/core/src/filemanager/controllers"
+	"github.com/MayCMF/core/src/filemanager/controllers/implement"
+	"github.com/MayCMF/core/src/filemanager/model"
+	imodel "github.com/MayCMF/core/src/filemanager/model/impl/gorm/model"
 	"go.uber.org/dig"
 )
 
