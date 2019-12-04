@@ -24,7 +24,7 @@ RBAC scaffolding based on Gin + GORM + Casbin + Dig. The goal is to provide a li
 
 ## Quick start
 
-> Use [mash](https://github.com/MayCCMF/mash) tool for quick clean instalation and generate addons
+> Use [mash](https://github.com/MayCMF/mash) tool for quick clean instalation and generate addons
 
 ### Quick create and run projects
 
