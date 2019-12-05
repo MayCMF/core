@@ -80,6 +80,16 @@ func (a *File) Create(ctx context.Context, item schema.File) error {
 	return nil
 }
 
+// Create - Create data
+func (a *File) Upload(ctx context.Context, item schema.File) error {
+	file := entity.SchemaFile(item).ToFile()
+	result := entity.GetFileDB(ctx, a.db).Create(file)
+	if err := result.Error; err != nil {
+		return errors.WithStack(err)
+	}
+	return nil
+}
+
 // Update - Update data
 func (a *File) Update(ctx context.Context, UUID string, item schema.File) error {
 	file := entity.SchemaFile(item).ToFile()

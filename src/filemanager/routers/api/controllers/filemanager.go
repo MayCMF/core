@@ -1,6 +1,9 @@
 package controllers
 
 import (
+	"path"
+	"time"
+
 	"github.com/MayCMF/core/src/common/ginplus"
 	"github.com/MayCMF/core/src/filemanager/controllers"
 	"github.com/MayCMF/core/src/filemanager/schema"
@@ -80,18 +83,64 @@ func (a *File) Get(c *gin.Context) {
 // @Router /api/v1/file [post]
 func (a *File) Create(c *gin.Context) {
 	var item schema.File
+
 	if err := ginplus.ParseJSON(c, &item); err != nil {
 		ginplus.ResError(c, err)
 		return
 	}
 
-	// item.UID = ginplus.GetUserID(c)
+	item.UUID = ginplus.GetUserUUID(c)
+	item.UID = uint(ginplus.GetUserID(c))
 	nitem, err := a.FileBll.Create(ginplus.NewContext(c), item)
 	if err != nil {
 		ginplus.ResError(c, err)
 		return
 	}
 	ginplus.ResSuccess(c, nitem)
+}
+
+// Upload - Upload File
+// @Tags File
+// @Summary Upload File
+// @Param Authorization header string false "Bearer User Token"
+// @Param body body schema.File true "Create data"
+// @Success 200 {object} schema.File
+// @Failure 400 {object} schema.HTTPError "{error:{code:0,message: Invalid request parameter}}"
+// @Failure 401 {object} schema.HTTPError "{error:{code:0,message: Unauthorized}}"
+// @Failure 500 {object} schema.HTTPError "{error:{code:0,message: Server Error}}"
+// @Router /api/v1/file/upload [post]
+func (a *File) Upload(c *gin.Context) {
+	var item schema.File
+
+	// Multipart form
+	// uid, err := strconv.ParseUint(c.PostForm("UserID"), 10, 32)
+	// item.UID = uint(uid)
+	// item.UserUUID = ginplus.GetUserUUID(c)
+	uri := c.PostForm("URL")
+	form, err := c.MultipartForm()
+	if err != nil {
+		ginplus.ResError(c, err)
+		return
+	}
+	files := form.File["MayFile"]
+	dst := "static" + item.Uri
+	for _, file := range files {
+		// Upload the file to specific dst.
+		controllers.CheckDir(dst + uri)
+		item.Uri = dst + uri + "/" + time.Now().Format("20060102-1504") + "_" + file.Filename
+		item.Filename = file.Filename
+		item.Filesize = file.Size
+		item.Filemime = file.Header.Get("Content-Type")
+		item.FileExt = path.Ext(file.Filename)
+		item.UID = uint(ginplus.GetUserID(c))
+		nitem, err := a.FileBll.Upload(ginplus.NewContext(c), item)
+		if err != nil {
+			ginplus.ResError(c, err)
+			return
+		}
+		c.SaveUploadedFile(file, item.Uri)
+		ginplus.ResSuccess(c, nitem)
+	}
 }
 
 // Update - Update data

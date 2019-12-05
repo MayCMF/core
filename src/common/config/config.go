@@ -61,6 +61,7 @@ type Config struct {
 	MySQL       MySQL       `toml:"mysql"`
 	Postgres    Postgres    `toml:"postgres"`
 	Sqlite3     Sqlite3     `toml:"sqlite3"`
+	FileManager FileManager `toml:"filemanager"`
 }
 
 // IsDebugMode - Is it debug mode?
@@ -188,6 +189,16 @@ type Gorm struct {
 	MaxIdleConns      int    `toml:"max_idle_conns"`
 	TablePrefix       string `toml:"table_prefix"`
 	EnableAutoMigrate bool   `toml:"enable_auto_migrate"`
+}
+
+// Postgres Configuration parameter
+type FileManager struct {
+	Dir         string   `toml:"dir"`
+	MaxSize     int64    `toml:"maxsize"`
+	ImagesDir   string   `toml:"images_dir"`
+	AllowImages []string `toml:"allow_images"`
+	FilesDir    string   `toml:"files_dir"`
+	AllowFiles  []string `toml:"allow_files"`
 }
 
 // MySQL configuration parameters

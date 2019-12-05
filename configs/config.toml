@@ -221,3 +221,12 @@ ssl_mode = "disable"
 path = "data/maycms.db"
 name = "MayCMS.db"
 dir = "data"
+
+# File Uplode Directories
+[filemanager]
+dir = "static"
+maxsize = 10485760
+images_dir = "images"
+allow_images = [".jpg", ".jpeg", ".png", ".ico", ".svg", ".bmp", ".gif"]
+file_dir = "files"
+allow_files = [".xls", ".json", ".doc", ".docx", ".pdf", ".xlsx", ".ods", ".jpg", ".jpeg", ".png", ".ico", ".svg", ".bmp", ".gif"]

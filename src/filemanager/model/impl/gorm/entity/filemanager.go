@@ -37,7 +37,7 @@ type File struct {
 	Filename *string `gorm:"column:filename;size:100;index;"` // File Name
 	Uri      *string `gorm:"column:uri;size:200;"`            // File URI
 	Filemime *string `gorm:"column:filemime;index;"`          // Filemime (image/jpeg, application/msword etc)
-	Filesize uint64  `gorm:"column:filesize;size:100;"`       // Filesize in bytes
+	Filesize int64   `gorm:"column:filesize;size:100;"`       // Filesize in bytes
 }
 
 func (a File) String() string {
@@ -52,12 +52,13 @@ func (a File) TableName() string {
 // ToSchemaFile - Convert to File object
 func (a File) ToSchemaFile() *schema.File {
 	item := &schema.File{
-		UUID:     a.UUID,
-		UID:      *a.UID,
-		Filename: *a.Filename,
-		Uri:      *a.Uri,
-		Filemime: *a.Filemime,
-		Filesize: a.Filesize,
+		UUID:      a.UUID,
+		UID:       *a.UID,
+		Filename:  *a.Filename,
+		Uri:       *a.Uri,
+		Filemime:  *a.Filemime,
+		Filesize:  a.Filesize,
+		CreatedAt: a.CreatedAt,
 	}
 	return item
 }

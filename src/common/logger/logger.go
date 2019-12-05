@@ -11,6 +11,7 @@ import (
 const (
 	TraceIDKey      = "trace_id"
 	UserUUIDKey     = "user_uuid"
+	UserIDKey       = "user_id"
 	SpanTitleKey    = "span_title"
 	SpanFunctionKey = "span_function"
 	VersionKey      = "version"

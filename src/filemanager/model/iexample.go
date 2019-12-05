@@ -18,4 +18,6 @@ type IFile interface {
 	Update(ctx context.Context, UUID string, item schema.File) error
 	// Delete data
 	Delete(ctx context.Context, UUID string) error
+	// Upload File
+	Upload(ctx context.Context, item schema.File) error
 }

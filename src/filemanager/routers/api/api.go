@@ -32,6 +32,7 @@ func RegisterRouter(app *gin.Engine, container *dig.Container) error {
 				gFile.GET("", cFile.Query)
 				gFile.GET(":id", cFile.Get)
 				gFile.POST("", cFile.Create)
+				gFile.POST("/upload", cFile.Upload)
 				gFile.PUT(":id", cFile.Update)
 				gFile.DELETE(":id", cFile.Delete)
 			}

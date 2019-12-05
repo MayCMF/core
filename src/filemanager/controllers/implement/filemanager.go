@@ -2,7 +2,9 @@ package implement
 
 import (
 	"context"
+	"strconv"
 
+	"github.com/MayCMF/core/src/common/config"
 	"github.com/MayCMF/core/src/common/errors"
 	commonschema "github.com/MayCMF/core/src/common/schema"
 	"github.com/MayCMF/core/src/common/util"
@@ -53,6 +55,29 @@ func (a *File) checkFilename(ctx context.Context, filename string) error {
 	return nil
 }
 
+func (a *File) checkFileExt(ctx context.Context, fileExt string) error {
+	cfg := config.Global().FileManager
+	allowTypes := cfg.AllowFiles
+	if len(allowTypes) != 0 {
+		for i := 0; i < len(allowTypes); i++ {
+			if allowTypes[i] == fileExt {
+				return nil
+			}
+		}
+		return errors.New400Response("Unsupport upload file type " + fileExt)
+	}
+	return nil
+}
+
+func (a *File) checkFileSize(ctx context.Context, Filesize int64) error {
+	cfg := config.Global().FileManager
+	MaxSize := cfg.MaxSize
+	if Filesize > MaxSize {
+		return errors.New400Response("Upload file too large, The max upload limit is " + strconv.Itoa(int(Filesize)))
+	}
+	return nil
+}
+
 func (a *File) getUpdate(ctx context.Context, UUID string) (*schema.File, error) {
 	return a.Get(ctx, UUID)
 }
@@ -69,6 +94,29 @@ func (a *File) Create(ctx context.Context, item schema.File) (*schema.File, erro
 	if err != nil {
 		return nil, err
 	}
+	return a.getUpdate(ctx, item.UUID)
+}
+
+// Upload - Upload File
+func (a *File) Upload(ctx context.Context, item schema.File) (*schema.File, error) {
+
+	err := a.checkFileExt(ctx, item.FileExt)
+	if err != nil {
+		return nil, err
+	}
+
+	err = a.checkFileSize(ctx, item.Filesize)
+	if err != nil {
+		return nil, err
+	}
+
+	// item.UID = getUserID(item.UserUUID)
+	item.UUID = util.MustUUID()
+	err = a.FileModel.Create(ctx, item)
+	if err != nil {
+		return nil, err
+	}
+
 	return a.getUpdate(ctx, item.UUID)
 }
 

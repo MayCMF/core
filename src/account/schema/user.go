@@ -7,6 +7,7 @@ import (
 
 // User - User object
 type User struct {
+	ID        uint      `json:"id"`                                    // Record ID
 	UUID      string    `json:"record_id"`                             // Record ID
 	UserName  string    `json:"user_name" binding:"required"`          // UserName
 	RealName  string    `json:"real_name" binding:"required"`          // RealName

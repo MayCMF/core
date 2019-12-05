@@ -99,8 +99,8 @@ func GetUserID(c *gin.Context) int {
 }
 
 // SetUserID - Set user ID
-func SetUserID(c *gin.Context, userID int) {
-	c.Set(UserIDKey, userID)
+func SetUserID(c *gin.Context, ID int) {
+	c.Set(UserIDKey, ID)
 }
 
 // GetUserUUID - Get user UUID
