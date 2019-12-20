@@ -1,10 +1,10 @@
 package api
 
 import (
-	"github.com/casbin/casbin/v2"
 	"github.com/MayCMF/core/src/account/routers/api/controllers"
 	"github.com/MayCMF/core/src/common/auth"
 	"github.com/MayCMF/core/src/common/middleware"
+	"github.com/casbin/casbin/v2"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
 )
@@ -44,7 +44,7 @@ func RegisterRouter(app *gin.Engine, container *dig.Container) error {
 		{
 			pub := v1.Group("/pub")
 			{
-				// [REGISTERED]/api/v1/pub/login
+				// [PUBLIC]/api/v1/pub/login
 				gLogin := pub.Group("login")
 				{
 					gLogin.GET("captchaid", cLogin.GetCaptcha)
@@ -53,10 +53,10 @@ func RegisterRouter(app *gin.Engine, container *dig.Container) error {
 					gLogin.POST("exit", cLogin.Logout)
 				}
 
-				// [REGISTERED]/api/v1/pub/refresh-token
+				// [PUBLIC]/api/v1/pub/refresh-token
 				pub.POST("/refresh-token", cLogin.RefreshToken)
 
-				// [REGISTERED]/api/v1/pub/current
+				// [PUBLIC]/api/v1/pub/current
 				gCurrent := pub.Group("current")
 				{
 					gCurrent.PUT("password", cLogin.UpdatePassword)

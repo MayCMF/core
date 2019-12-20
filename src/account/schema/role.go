@@ -7,7 +7,7 @@ import (
 
 // Role - Role object
 type Role struct {
-	UUID    string          `json:"record_id"`                           // Record ID
+	UUID        string          `json:"record_id"`                           // Record ID
 	Name        string          `json:"name" binding:"required"`             // Role Name
 	Sequence    int             `json:"sequence"`                            // Sort value
 	Memo        string          `json:"memo"`                                // Remarks
@@ -25,10 +25,10 @@ type RolePermission struct {
 
 // RoleQueryParam - Query conditions
 type RoleQueryParam struct {
-	UUIDs []string // Record ID list
-	Name      string   // Role Name
-	LikeName  string   // Role name (fuzzy query)
-	UserUUID  string   // User UUID
+	UUIDs    []string // Record ID list
+	Name     string   // Role Name
+	LikeName string   // Role name (fuzzy query)
+	UserUUID string   // User UUID
 }
 
 // RoleQueryOptions Query optional parameter items

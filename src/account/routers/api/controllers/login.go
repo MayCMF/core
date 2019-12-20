@@ -94,8 +94,12 @@ func (a *Login) Login(c *gin.Context) {
 		return
 	}
 
-	userUUID := user.UUID
+	userID := user.ID
 	// Put user ID into context
+	ginplus.SetUserID(c, int(userID))
+
+	userUUID := user.UUID
+	// Put user UUID into context
 	ginplus.SetUserUUID(c, userUUID)
 
 	tokenInfo, err := a.LoginBll.GenerateToken(ginplus.NewContext(c), userUUID)

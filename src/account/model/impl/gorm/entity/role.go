@@ -25,7 +25,7 @@ type SchemaRole schema.Role
 // ToRole - Convert to a role entity
 func (a SchemaRole) ToRole() *Role {
 	item := &Role{
-		UUID: a.UUID,
+		UUID:     a.UUID,
 		Name:     &a.Name,
 		Sequence: &a.Sequence,
 		Memo:     &a.Memo,
@@ -46,7 +46,7 @@ func (a SchemaRole) ToRolePermissions() []*RolePermission {
 // Role - Role entity
 type Role struct {
 	entity.Model
-	UUID string  `gorm:"column:record_id;size:36;index;"` // Record internal code
+	UUID     string  `gorm:"column:record_id;size:36;index;"` // Record internal code
 	Name     *string `gorm:"column:name;size:100;index;"`     // Role Name
 	Sequence *int    `gorm:"column:sequence;index;"`          // Sort value
 	Memo     *string `gorm:"column:memo;size:200;"`           // Remarks
@@ -65,7 +65,7 @@ func (a Role) TableName() string {
 // ToSchemaRole - Convert to a role object
 func (a Role) ToSchemaRole() *schema.Role {
 	item := &schema.Role{
-		UUID:  a.UUID,
+		UUID:      a.UUID,
 		Name:      *a.Name,
 		Sequence:  *a.Sequence,
 		Memo:      *a.Memo,

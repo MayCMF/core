@@ -127,7 +127,7 @@ redis_prefix = "auth_"
 # Storage method (support: memory/redis)
 store = "memory"
 # Digital length
-length = 4
+length = 6
 # Image width
 width = 300
 # Picture height
