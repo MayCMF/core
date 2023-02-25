@@ -6,7 +6,6 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/LyricTian/captcha v0.0.0-20190614104510-11aff818cbf4
 	github.com/LyricTian/queue v1.2.0
-	github.com/MayCMF/example v0.0.0-20191203174407-26782db23488 // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/casbin/casbin/v2 v2.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -27,7 +26,7 @@ require (
 	github.com/swaggo/swag v1.6.3
 	github.com/tidwall/buntdb v1.1.2
 	go.uber.org/dig v1.8.0
-	golang.org/x/sys v0.0.0-20191127021746-63cb32ae39b2 // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4
 	gopkg.in/go-playground/validator.v9 v9.30.2 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect
