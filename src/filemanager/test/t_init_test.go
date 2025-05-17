@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"net/url"
 
-	app "github.com/MayCMF/core/src/"
+	app "github.com/MayCMF/core/src"
 	"github.com/MayCMF/core/src/common/config"
 	"github.com/gin-gonic/gin"
 )
